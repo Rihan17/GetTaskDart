@@ -93,7 +93,6 @@ class ConteudoCabecalho extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Getting the size of the screen
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Row(
@@ -135,7 +134,7 @@ class PilhaCabecalho extends StatelessWidget {
         children: [
           Positioned(
             top: 20,
-            left: (screenWidth / 2) - (100 / 2),
+            left: (screenWidth / 2) - (140 / 2),
             child: const Text(
               'Olá, Rihan',
               style: TextStyle(
@@ -148,7 +147,7 @@ class PilhaCabecalho extends StatelessWidget {
           ),
           Positioned(
             top: 10,
-            left: (screenWidth / 2) - (60), // Centering the image
+            left: (screenWidth / 2) - (145/2),
             child: Image.asset('images/avaliacao.png', width: 120, height: 120),
           ),
         ],
@@ -320,29 +319,6 @@ class Vaga extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class SearchBarApp extends StatelessWidget {
-  const SearchBarApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Search Bar Sample')),
-        body: SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height,
-            ),
-            child: IntrinsicHeight(
-              child: Column(children: [TituloVagas(), Vaga()]),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }
@@ -773,19 +749,20 @@ class TituloVagas extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 10), // Espaço entre o texto "Vagas" e a barra de busca
+        SizedBox(height: 10),
         Center(
           child: Container(
-            width: searchBarWidth, // Nova largura ajustada
+            width: searchBarWidth,
             child: SearchBar(
               leading: Icon(Icons.search),
               hintText: "Busque uma vaga...",
               onChanged: (value) => print("Digitando: $value"),
-              backgroundColor: WidgetStatePropertyAll(Colors.orange),
-              shadowColor: WidgetStatePropertyAll(Colors.white),
+              backgroundColor: WidgetStatePropertyAll(Colors.white),
+              shadowColor: WidgetStatePropertyAll(Colors.orange),
               shape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               ),
+
             ),
           ),
         ),
