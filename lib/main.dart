@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() {
   runApp(const MyApp());
@@ -440,39 +441,60 @@ class HomePage extends StatelessWidget {
 class ConfigPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text('OI');
+    return SafeArea(
+        child: Column(
+          children: [
+            FundoConfiguracoes(),
+            Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+
+                    ],
+                  ),
+                ),
+            ),
+          ],
+        ),
+    );
   }
 }
 
 class VagasPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ConteudoCabecalhoVagas(),
-                TituloVagas(),
-                SizedBox(height: 30),
-                Vaga(),
-                SizedBox(height: 10),
-                Vaga(),
-                SizedBox(height: 10),
-                Vaga(),
-                SizedBox(height: 10),
-                Vaga(),
-                SizedBox(height: 10),
-                Vaga(),
-              ],
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
+
+    return SafeArea(
+      child: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ConteudoCabecalhoVagas(),
+                  TituloVagas(),
+                  SizedBox(height: screenHeight * 0.03),
+                  Vaga(),
+                  SizedBox(height: screenHeight * 0.01),
+                  Vaga(),
+                  SizedBox(height: screenHeight * 0.01),
+                  Vaga(),
+                  SizedBox(height: screenHeight * 0.01),
+                  Vaga(),
+                  SizedBox(height: screenHeight * 0.01),
+                  Vaga(),
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
+
 
 final List<SalomonBottomBarItem> _navBarItems = [
   SalomonBottomBarItem(icon: Icon(Icons.home), title: Text('Home')),
@@ -770,3 +792,181 @@ class TituloVagas extends StatelessWidget {
     );
   }
 }
+
+class FundoConfiguracoes extends StatelessWidget {
+  const FundoConfiguracoes({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    return Container(
+      width: screenWidth,
+      height: screenHeight * 0.25,
+      decoration: const ShapeDecoration(
+        color: Color(0xFFDD7514),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20),
+          ),
+        ),
+      ),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            width: screenWidth,
+            height: screenHeight * 0.25,
+            color: Colors.transparent,
+          ),
+          Positioned(
+            top: screenHeight * 0.10,
+            left: screenWidth * 0.28,
+            child: const Text(
+              'Configurações',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -screenHeight * 0.50,
+            left: screenWidth * 0.1,
+            child: Container(
+              width: screenWidth * 0.8,
+              height: screenHeight * 0.55,
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Container(
+                  constraints: const BoxConstraints(maxWidth: 400),
+                  child: ListView(
+                    children: [
+                      const _CustomListTile(
+                        title: "About Phone",
+                        icon: CupertinoIcons.device_phone_portrait,
+                      ),
+                      _CustomListTile(
+                        title: "Dark Mode",
+                        icon: CupertinoIcons.moon,
+                        trailing: CupertinoSwitch(value: false, onChanged: (value) {}),
+                      ),
+                      const _CustomListTile(
+                        title: "System Apps Updater",
+                        icon: CupertinoIcons.cloud_download,
+                      ),
+                      const _CustomListTile(
+                        title: "Security Status",
+                        icon: CupertinoIcons.lock_shield,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CustomListTile extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final Widget? trailing;
+
+  const _CustomListTile({
+    Key? key,
+    required this.title,
+    required this.icon,
+    this.trailing,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(icon),
+      title: Text(title),
+      trailing: trailing,
+    );
+  }
+}
+
+
+
+
+class TituloConfig extends StatelessWidget {
+  const TituloConfig({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    return Container(
+      width: screenWidth,
+      height: screenHeight * 0.1,
+      child: Stack(
+        children: [
+          Positioned(
+            top: screenHeight * 0.001,
+            left: screenWidth * 0.25,
+            child: const Text(
+              'Configurações',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+class TextGetTask extends StatelessWidget {
+  const TextGetTask({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    return Container(
+      width: screenWidth,
+      height: screenHeight * 0.1,
+      child: Stack(
+        children: [
+          Positioned(
+            top: screenHeight * 0.001,
+            left: screenWidth * 0.01,
+            child: const Text(
+              'GetTask',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+
