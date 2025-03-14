@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:flutter/cupertino.dart';
-
+import 'planos.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -172,7 +171,10 @@ class TaskPlus extends StatelessWidget {
           margin: const EdgeInsets.all(5),
           child: ElevatedButton(
             onPressed: () {
-              print('Botão Task+ pressionado');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Planos()),
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFFDD7514),
@@ -408,32 +410,37 @@ class _GoogleBottomBarState extends State<GoogleBottomBar> {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CabecalhoPersonalizado(),
-        SizedBox(height: 20),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                TaskPlus(),
-                SizedBox(height: 10),
-                TextVagasDisponiveis(),
-                SizedBox(height: 10),
-                Vaga(),
-                SizedBox(height: 10),
-                Vaga(),
-                SizedBox(height: 10),
-                TextVagasAceitas(),
-                SizedBox(height: 10),
-                VagaAceita(),
-                SizedBox(height: 10),
-                CadVaga(),
-              ],
+    return Scaffold(
+      body: Container(
+        color: Colors.white, // Defina a cor de fundo desejada aqui
+        child: Column(
+          children: [
+            CabecalhoPersonalizado(),
+            SizedBox(height: 20),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    TaskPlus(),
+                    SizedBox(height: 10),
+                    TextVagasDisponiveis(),
+                    SizedBox(height: 10),
+                    Vaga(),
+                    SizedBox(height: 10),
+                    Vaga(),
+                    SizedBox(height: 10),
+                    TextVagasAceitas(),
+                    SizedBox(height: 10),
+                    VagaAceita(),
+                    SizedBox(height: 10),
+                    CadVaga(),
+                  ],
+                ),
+              ),
             ),
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
@@ -442,23 +449,27 @@ class ConfigPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      child: Container(
+        color: Color(0xE4E6E6E4),
         child: Column(
           children: [
             FundoConfiguracoes(),
             Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
 
-                    ],
-                  ),
+                  ],
                 ),
+              ),
             ),
           ],
         ),
+      ),
     );
   }
 }
+
 
 class VagasPage extends StatelessWidget {
   @override
@@ -841,7 +852,7 @@ class FundoConfiguracoes extends StatelessWidget {
               width: screenWidth * 0.8,
               height: screenHeight * 0.55,
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
@@ -849,22 +860,49 @@ class FundoConfiguracoes extends StatelessWidget {
                   constraints: const BoxConstraints(maxWidth: 400),
                   child: ListView(
                     children: [
+                      // Adicionando os textos centralizados acima da lista
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 50),
+                          child: Text(
+                            'Rihan',
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 60),
+                          child: Text(
+                            'rihan@gmail.com',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Lista de opções
                       const _CustomListTile(
-                        title: "About Phone",
-                        icon: CupertinoIcons.device_phone_portrait,
+                        title: "Permissões do Dispositivo",
+                        icon: (Icons.person),
                       ),
                       _CustomListTile(
-                        title: "Dark Mode",
-                        icon: CupertinoIcons.moon,
-                        trailing: CupertinoSwitch(value: false, onChanged: (value) {}),
+                        title: "Notificações",
+                        icon: (Icons.notifications),
+                        trailing: SwitchExample(),
                       ),
                       const _CustomListTile(
-                        title: "System Apps Updater",
-                        icon: CupertinoIcons.cloud_download,
+                        title: "Versão do App",
+                        icon: (Icons.info_outline),
                       ),
                       const _CustomListTile(
-                        title: "Security Status",
-                        icon: CupertinoIcons.lock_shield,
+                        title: "Excluir conta",
+                        icon: (Icons.delete),
+                        textColor: Color(0xFF800000),
                       ),
                     ],
                   ),
@@ -882,25 +920,51 @@ class _CustomListTile extends StatelessWidget {
   final String title;
   final IconData icon;
   final Widget? trailing;
+  final Color? textColor;
 
   const _CustomListTile({
-    Key? key,
     required this.title,
     required this.icon,
     this.trailing,
-  }) : super(key: key);
+    this.textColor,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon),
-      title: Text(title),
+      leading: Icon(icon, color: textColor ?? Colors.black),
+      title: Text(
+        title,
+        style: TextStyle(color: textColor ?? Colors.black),
+      ),
       trailing: trailing,
     );
   }
 }
 
+class SwitchExample extends StatefulWidget {
+  const SwitchExample({super.key});
 
+  @override
+  State<SwitchExample> createState() => _SwitchExampleState();
+}
+
+class _SwitchExampleState extends State<SwitchExample> {
+  bool light = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Switch(
+      value: light,
+      activeColor: Colors.blue,
+      onChanged: (bool value) {
+        setState(() {
+          light = value;
+        });
+      },
+    );
+  }
+}
 
 
 class TituloConfig extends StatelessWidget {
