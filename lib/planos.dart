@@ -38,13 +38,13 @@ class Voltar extends StatelessWidget {
             child: IconButton(
               icon: Icon(
                 Icons.arrow_back,
-                size: 40, // Aumente o tamanho do ícone
-                color: Colors.blue, // Mude a cor do ícone
+                size: 40, 
+                color: Color(0xFFDD7514), 
               ),
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
+                  MaterialPageRoute(builder: (context) => MyApp()),
                       (Route<dynamic> route) => false,
                 );
               },

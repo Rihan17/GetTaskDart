@@ -834,7 +834,7 @@ class FundoConfiguracoes extends StatelessWidget {
           ),
           Positioned(
             top: screenHeight * 0.10,
-            left: screenWidth * 0.28,
+            left: screenWidth * 0.30,
             child: const Text(
               'Configurações',
               style: TextStyle(
@@ -846,11 +846,11 @@ class FundoConfiguracoes extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: -screenHeight * 0.50,
+            bottom: -screenHeight * 0.56,
             left: screenWidth * 0.1,
             child: Container(
               width: screenWidth * 0.8,
-              height: screenHeight * 0.55,
+              height: screenHeight * 0.60,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -860,7 +860,6 @@ class FundoConfiguracoes extends StatelessWidget {
                   constraints: const BoxConstraints(maxWidth: 400),
                   child: ListView(
                     children: [
-                      // Adicionando os textos centralizados acima da lista
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.only(top: 50),
@@ -885,7 +884,6 @@ class FundoConfiguracoes extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // Lista de opções
                       const _CustomListTile(
                         title: "Permissões do Dispositivo",
                         icon: (Icons.person),
